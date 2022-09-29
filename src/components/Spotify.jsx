@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import axios from "axios";
@@ -11,21 +11,12 @@ import Songs from "./Songs";
 import Player from "./Player";
 
 export default function Spotify() {
+  let [current, setcurrent] = useState(0)
   const [currentsong, setcurrentsong] = useState();
   const [songdata, setsongdata] = useState([]);
 
   const [{ token }, dispatch] = useStateProvider();
-  const [navBackground, setNavBackground] = useState(false);
-  const [headerBackground, setHeaderBackground] = useState(false);
-  const bodyRef = useRef();
-  const bodyScrolled = () => {
-    bodyRef.current.scrollTop >= 30
-      ? setNavBackground(true)
-      : setNavBackground(false);
-    bodyRef.current.scrollTop >= 268
-      ? setHeaderBackground(true)
-      : setHeaderBackground(false);
-  };
+ 
   useEffect(() => {
     console.log(songdata, "a");
     setcurrentsong(songdata[0]);
@@ -49,8 +40,15 @@ export default function Spotify() {
   }, [dispatch, token]);
   useEffect(() => {
     console.log(currentsong, "123");
-    // console.log(currentsong.track.name)
+
   }, [currentsong]);
+
+
+  useEffect(()=>{
+    console.log(current);
+  },[current])
+
+
 
   useEffect(() => {
     const getPlaybackState = async () => {
@@ -75,17 +73,22 @@ export default function Spotify() {
         </div>
         <div className="songslist">
           <Songs
-            setcurrentsong={setcurrentsong}
-            songdata={songdata}
-            setsongdata={setsongdata}
-          />
-        </div>
-        <div className="player">
-          <Player
+            current={current}
             setcurrentsong={setcurrentsong}
             currentsong={currentsong}
             songdata={songdata}
             setsongdata={setsongdata}
+            setcurrent={setcurrent}
+          />
+        </div>
+        <div className="player">
+          <Player
+            setcurrent={setcurrent}
+            setcurrentsong={setcurrentsong}
+            currentsong={currentsong}
+            songdata={songdata}
+            setsongdata={setsongdata}
+            current={current}
           />
         </div>
       </div>

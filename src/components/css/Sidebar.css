@@ -6,7 +6,10 @@
   font-size: 20px;
   line-height: 32px;
   padding: 12px;
+  padding-left: 100px;
   /* vw; */
+  padding-left: 30px;
+    padding-top: 25px;
 }
 .listitems li {
   list-style-type: none;

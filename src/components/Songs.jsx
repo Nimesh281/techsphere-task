@@ -7,12 +7,13 @@ import search from "../images/Search.png";
 import listitem from "../images/listitem.png";
 import a from "../images/1.png";
 import burger from "../images/burger.png";
+import pause from "../images/pause.png";
 import cancel from "../images/cancel.png";
 import "../components/css/Songs.css";
 import "../components/css/Menu.css";
 
 function Songs(props) {
-  let key = 0;
+  let index = 0;
   const [listflag, setlistflag] = useState(0);
   // const [songdata, setsongdata] = useState([]);
   const [{ token, selectedPlaylist, selectedPlaylistId }, dispatch] =
@@ -67,6 +68,9 @@ function Songs(props) {
     let audio = document.getElementById("audio");
     //  console.log(audio)
     audio.play();
+    console.log(props.current)
+    
+    // console.log(key)
   }
 
   let list = document.getElementById("list");
@@ -86,6 +90,42 @@ function Songs(props) {
       setlistflag(0);
       burger1.src = burger;
     }
+  } 
+
+function handleclick(index){
+ 
+  let blur = document.getElementById(`${index}`)
+  blur.style.background= "#FFFFFF54";
+  blur.style.borderRadius= "5px";
+
+  ;
+  
+  for(let i=0 ; i<props.songdata.length; i++){
+    if(i!==index){
+    let blur = document.getElementById(`${i}`);
+    console.log(blur);
+    blur.style.background="none";
+    
+    }
+  }
+
+  
+
+  // console.log(index,"kjahwjvjew")
+  console.log(blur)
+  
+ }
+  
+  const setaudio=()=>{
+    let audio = document.getElementById("audio") ;
+   
+    let playbutton = document.getElementById("play") ;
+    playbutton.src=pause;
+    setTimeout(()=>{
+      audio.play();
+     },100)
+      // console.log(audio)},1000
+  
   }
 
   return (
@@ -101,12 +141,26 @@ function Songs(props) {
         <div className="tracks">
           <div id="list" className="list">
             {props.songdata &&
-              props.songdata.map((song) => {
-                key = key + 1;
+              props.songdata.map((song, index) => {
+              //  key=key+1
                 return (
-                  <div id={key} className="active" onClick={selected}>
+                  <div
+                    id={index}
+                    className="container"
+                    onClick={()=>{handleclick(index)}}
+                    // {console.log(audio)}
+                    // audio.play();
+                    // console.log(props.current)}}
+                  >
                     <div
-                      onClick={() => props.setcurrentsong(song)}
+                      onClick={() => {
+                      props.setcurrentsong(song);
+                      props.setcurrent(index+1);
+                      setaudio();
+                      //  console.log(audio)
+                      //  setTimeout(audio.play(),500);
+                      // audio.play();
+                      console.log(props.current)}}
                       className="track_container"
                     >
                       <div className="img-cont">
@@ -126,6 +180,7 @@ function Songs(props) {
                       </div>
                     </div>
                   </div>
+               
                 );
               })}
           </div>
