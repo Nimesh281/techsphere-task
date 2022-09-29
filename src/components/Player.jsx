@@ -105,7 +105,7 @@ function Player(props) {
  
     let blur = document.getElementById(`${index}`)
     blur.style.background= "#FFFFFF54";
-    blur.style.borderRadius= "5px";
+    blur.style.borderRadius= "15px";
   
     ;
     

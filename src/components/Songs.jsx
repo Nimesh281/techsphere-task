@@ -14,6 +14,7 @@ import "../components/css/Menu.css";
 
 function Songs(props) {
   let index = 0;
+ 
   const [listflag, setlistflag] = useState(0);
   // const [songdata, setsongdata] = useState([]);
   const [{ token, selectedPlaylist, selectedPlaylistId }, dispatch] =
@@ -96,7 +97,7 @@ function handleclick(index){
  
   let blur = document.getElementById(`${index}`)
   blur.style.background= "#FFFFFF54";
-  blur.style.borderRadius= "5px";
+  blur.style.borderRadius= "15px";
 
   ;
   
@@ -108,6 +109,7 @@ function handleclick(index){
     
     }
   }
+  
 
   
 
@@ -183,6 +185,7 @@ function handleclick(index){
                
                 );
               })}
+              
           </div>
         </div>
       </div>
